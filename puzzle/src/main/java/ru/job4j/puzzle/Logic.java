@@ -71,22 +71,23 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        int horizontal = 0;
+        int vertical = 0;
         for (int i = 0; i < table.length; i++) {
-            if (table[i][i] == 1) {
+            if (horizontal == table.length) {
                 result = true;
-                for (int k = 0; k < table.length; k++) {
-                    if (table[k][i] != 1) {
-                        result = false;
-                        break;
-                    }
-                }
-                if (!result) {
-                    result = true;
-                    for (int k = 0; k < table.length; k++) {
-                        if (table[i][k] != 1) {
-                            result = false;
-                            break;
-                        }
+                break;
+            } if (vertical == table.length) {
+                result = true;
+                break;
+            } else {
+                horizontal = 0;
+                vertical = 0;
+                for (int j = 0; j < table.length; j++) {
+                    if (table[i][j] == 1){
+                        horizontal++;
+                    } if (table[j][i] == 1) {
+                        vertical++;
                     }
                 }
             }
@@ -112,3 +113,4 @@ public class Logic {
         return Arrays.toString(this.convert());
     }
 }
+
