@@ -74,10 +74,7 @@ public class Logic {
         int horizontal = 0;
         int vertical = 0;
         for (int i = 0; i < table.length; i++) {
-            if (horizontal == table.length) {
-                result = true;
-                break;
-            } if (vertical == table.length) {
+            if (horizontal == table.length || vertical == table.length ) {
                 result = true;
                 break;
             } else {
