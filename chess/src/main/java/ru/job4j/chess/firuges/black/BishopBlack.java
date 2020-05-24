@@ -1,10 +1,9 @@
 package ru.job4j.chess.firuges.black;
 
-import ru.job4j.chess.DirectionOfTravel;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
-public class BishopBlack extends DirectionOfTravel implements Figure {
+public class BishopBlack  implements Figure {
     private final Cell position;
 
     public BishopBlack(final Cell position) {
@@ -23,45 +22,13 @@ public class BishopBlack extends DirectionOfTravel implements Figure {
                     String.format("Could not move by diagonal from %s to %s", source, dest)
             );
         }
-        int size = 0;
-        int deltaX = source.x;
-        int deltaY = source.y;
-        int a = 0;
-        int b = 0;
-        switch (directionOfTravel(source.x, dest.x, source.y, dest.y)){
-            case 0:
-                size = dest.x - source.x;
-                deltaX += 1;
-                deltaY += 1;
-                a = 1;
-                b = 1;
-                break;
-            case 1:
-                size = source.x - dest.x;
-                deltaX -= 1;
-                deltaY += 1;
-                a = -1;
-                b = 1;
-                break;
-            case 2:
-                size = dest.x - source.x;
-                deltaX += 1;
-                deltaY -= 1;
-                a = 1;
-                b = -1;
-                break;
-            case 3:
-                size = source.x - dest.x;
-                deltaX -= 1;
-                deltaY -= 1;
-                a = -1;
-                b = -1;
-                break;
-        }
+        int size = Math.abs(dest.x - source.x);
+        int deltaX = dest.x > source.x ? 1 : -1;
+        int deltaY = dest.y > source.y ? 1 : -1;
         Cell[] steps = new Cell[size];
         for (int index = 0; index < size; index++) {
-            int x = deltaX + (index * a);
-            int y = deltaY + (index * b);
+            int x = source.x + (index + 1) * deltaX;
+            int y = source.y + (index + 1) * deltaY;
             steps[index] = Cell.findBy(x, y);
         }
 
@@ -69,10 +36,7 @@ public class BishopBlack extends DirectionOfTravel implements Figure {
     }
 
     public boolean isDiagonal(Cell source, Cell dest)  {
-        if(Math.abs(dest.x-source.x) != Math.abs(dest.y-source.y)){
-            throw new IllegalStateException();
-        }
-        return true;
+        return Math.abs(dest.x-source.x) == Math.abs(dest.y-source.y);
     }
 
     @Override

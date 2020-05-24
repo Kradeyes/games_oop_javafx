@@ -26,15 +26,10 @@ public class BishopBlackTest extends TestCase {
     }
 
     @Test
-    public void testIsDiagonal() throws IllegalStateException {
+    public void testIsDiagonal()  {
         BishopBlack test = new BishopBlack(Cell.A1);
-        try {
-            test.isDiagonal(Cell.A1, Cell.A2);
-            Assert.fail("Expected IllegalStateException");
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
+        assertFalse(test.isDiagonal(Cell.A1, Cell.A2));
         }
     }
 
-}
 
